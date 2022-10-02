@@ -13,7 +13,8 @@ import * as efs from 'aws-cdk-lib/aws-efs';
 
 
      const params = {
-      FileSystemId: fileSystem.fileSystemId,
+      FileSystemId:
+       fileSystem.fileSystemId,
       PosixUser: {
         Gid: 1000,
         Uid: 1000
