@@ -8,15 +8,7 @@
 >
 > This examples is built on Construct Libraries marked "Experimental" and may not be updated for latest breaking changes.
 >
-> It additionally requires infrastructure prerequisites that must be created before successful build.
->
-> If build is unsuccessful, please create an [issue](https://github.com/aws-samples/aws-cdk-examples/issues/new) so that we may debug the problem 
 
----
-<!--END STABILITY BANNER-->
-
-This an example of an Amplify Console App, triggering a build and deploy of a static site on every GitHub Repository master push.
-This example requires a github repo containing a static website.
 
 ## Build
 

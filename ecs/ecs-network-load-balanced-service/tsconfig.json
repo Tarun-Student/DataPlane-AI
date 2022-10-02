@@ -14,7 +14,7 @@
         "noFallthroughCasesInSwitch": false,
         "inlineSourceMap": true,
         "inlineSources": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": false,
         "strictPropertyInitialization":false
     }
 }
