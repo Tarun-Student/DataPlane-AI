@@ -11,7 +11,7 @@ const EPHEMERAL_PORT_RANGE = ec2.Port.tcpRange(32768, 65535);
 class BonjourECS extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
+      Test Updated 
     // For better iteration speed, it might make sense to put this VPC into
     // a separate stack and import it here. We then have two stacks to
     // deploy, but VPC creation is slow so we'll only have to do that once

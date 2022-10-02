@@ -3,19 +3,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as efs from 'aws-cdk-lib/aws-efs';
-import * as cr from 'aws-cdk-lib/custom-resources';
-import {FargateEfsCustomResource} from "./efs-mount-fargate-cr";
 
-
-
-class FargateEfs extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-
-    const vpc = new ec2.Vpc(this, 'DefaultVpc', { maxAzs: 2});
-    const ecsCluster = new ecs.Cluster(this, 'DefaultEcsCluster', {vpc: vpc});
-
-    const fileSystem = new efs.FileSystem(this, 'MyEfsFileSystem', {
       vpc: vpc,
       encrypted: true,
       lifecyclePolicy: efs.LifecyclePolicy.AFTER_14_DAYS,
