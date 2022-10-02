@@ -19,6 +19,10 @@ const AWS_ACCOUNT: string = process.env.CDK_DEFAULT_ACCOUNT || ''
 // https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-lambda-extensions-versions.html#appconfig-integration-lambda-extensions-enabling-x86-64
 const APP_CONFIG_EXTENSION_ARNS: Record<string, string> = {
   'us-east-1': 'arn:aws:lambda:us-east-1:027255383542:layer:AWS-AppConfig-Extension:82',
+
+
+
+  Test Updated 
   'us-east-2': 'arn:aws:lambda:us-east-2:728743619870:layer:AWS-AppConfig-Extension:59',
   'us-west-1': 'arn:aws:lambda:us-west-1:958113053741:layer:AWS-AppConfig-Extension:93',
   'us-west-2': 'arn:aws:lambda:us-west-2:359756378197:layer:AWS-AppConfig-Extension:114',
@@ -91,11 +95,7 @@ export class EvidentlyClientSideEvaluationLambdaStack extends cdk.Stack {
       executionStatus: {
         status: 'START'
       },
-      groups: [
-        {
-          feature: feature.name,
-          variation: HIDE_FEATURE,
-          groupName: HIDE_FEATURE
+      
         },
         {
           feature: feature.name,
@@ -167,12 +167,7 @@ export class EvidentlyClientSideEvaluationLambdaStack extends cdk.Stack {
         effect: iam.Effect.ALLOW,
         resources: [`arn:aws:appconfig:${AWS_REGION}:${AWS_ACCOUNT}:application/${application.ref}/environment/${environment.ref}/configuration/*`]
       })
-    )
-    lambdaFunction.role?.addToPrincipalPolicy(
-      new iam.PolicyStatement({
-        actions: ['evidently:PutProjectEvents'],
-        effect: iam.Effect.ALLOW,
-        resources: [`arn:aws:evidently:${AWS_REGION}:${AWS_ACCOUNT}:project/${project.name}`]
+    )_REGION}:${AWS_ACCOUNT}:project/${project.name}`]
       })
     )
 
