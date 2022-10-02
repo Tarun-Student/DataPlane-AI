@@ -6,7 +6,7 @@ export class AmplifyConsoleAppCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const amplifyApp = new CfnApp(this, 'test-app', {
+    const amplifyApp = new CfnApp(this, 'test-app1212', {
       name: 'your-amplify-console-app-name',
       repository: 'https://github.com/<the-rest-of-the-repository-url>',
       oauthToken: '<your-gitHub-oauth-token>'

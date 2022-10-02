@@ -10,6 +10,11 @@ const SHOW_FEATURE = 'showFeature'
 const AWS_REGION: string = process.env.CDK_DEFAULT_REGION || ''
 const AWS_ACCOUNT: string = process.env.CDK_DEFAULT_ACCOUNT || ''
 
+
+
+
+
+
 // We must choose the Lambda Layer ARN that corresponds with the AWS Region where you create your Lambda:
 // https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-lambda-extensions-versions.html#appconfig-integration-lambda-extensions-enabling-x86-64
 const APP_CONFIG_EXTENSION_ARNS: Record<string, string> = {
@@ -115,6 +120,31 @@ export class EvidentlyClientSideEvaluationLambdaStack extends cdk.Stack {
       }]
     })
     launch.addDependsOn(feature)
+
+    for (const file of process.argv.splice(2)) {
+      const pkg = JSON.parse(fs.readFileSync(file).toString());
+    
+      if (pkg.version !== marker) {
+        throw new Error(`unexpected - all package.json files in this repo should have a version of ${marker}: ${file}`);
+      }
+    
+      pkg.version = repoVersion;
+    
+      processSection(pkg.dependencies || { }, file);
+      processSection(pkg.devDependencies || { }, file);
+      processSection(pkg.peerDependencies || { }, file);
+    
+      console.error(`${file} => ${repoVersion}`);
+      fs.writeFileSync(file, JSON.stringify(pkg, undefined, 2));
+    }
+    
+    function processSection(section, file) {
+      for (const [ name, version ] of Object.entries(section)) {
+        if (version === marker || version === '^' + marker) {
+          section[name] = version.replace(marker, repoVersion);
+        }
+      }
+    }
 
     // Create Lambda resources
     const lambdaFunction = new lambda.Function(this, 'LambdaFunction', {
